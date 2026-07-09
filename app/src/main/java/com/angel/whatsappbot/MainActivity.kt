@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
+import com.google.android.material.materialswitch.MaterialSwitch
 
 /**
  * Pantalla mínima de configuración. Su única misión es guiar al usuario para:
@@ -25,6 +26,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         statusText = findViewById(R.id.statusText)
+
+        findViewById<MaterialSwitch>(R.id.switchBotEnabled).apply {
+            isChecked = BotPrefs.isEnabled(this@MainActivity)
+            setOnCheckedChangeListener { _, checked ->
+                BotPrefs.setEnabled(this@MainActivity, checked)
+                updateStatus()
+            }
+        }
 
         findViewById<Button>(R.id.btnNotificationAccess).setOnClickListener {
             startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
@@ -52,6 +61,7 @@ class MainActivity : AppCompatActivity() {
             R.string.status_template,
             if (listenerEnabled) "✅" else "❌",
             if (batteryExempt) "✅" else "❌",
+            getString(if (BotPrefs.isEnabled(this)) R.string.bot_state_on else R.string.bot_state_off),
         )
     }
 

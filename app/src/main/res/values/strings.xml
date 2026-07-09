@@ -4,5 +4,8 @@
     <string name="service_label">WhatsApp Bot — escucha de notificaciones</string>
     <string name="btn_notification_access">Conceder acceso a notificaciones</string>
     <string name="btn_battery_optimization">Eximir de optimización de batería</string>
-    <string name="status_template">Acceso a notificaciones: %1$s\nExención de batería: %2$s</string>
+    <string name="status_template">Acceso a notificaciones: %1$s\nExención de batería: %2$s\nBot: %3$s</string>
+    <string name="switch_bot_enabled">Respuestas automáticas</string>
+    <string name="bot_state_on">✅ activo</string>
+    <string name="bot_state_off">⏸️ pausado</string>
 </resources>

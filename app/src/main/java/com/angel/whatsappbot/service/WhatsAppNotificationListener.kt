@@ -6,6 +6,7 @@ import android.service.notification.StatusBarNotification
 import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.core.app.NotificationCompat
+import com.angel.whatsappbot.BotPrefs
 import com.angel.whatsappbot.ai.LocalAiProcessor
 import com.angel.whatsappbot.ai.MediaPipeAiProcessor
 import com.angel.whatsappbot.ai.MockAiProcessor
@@ -77,6 +78,9 @@ class WhatsAppNotificationListener : NotificationListenerService() {
     private var lastSendAtMs = 0L
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
+        // 0) Interruptor global: apagado desde la app, se ignora todo.
+        if (!BotPrefs.isEnabled(this)) return
+
         // 1) Filtrar solo las apps objetivo (Meta Business Suite por defecto).
         if (sbn.packageName !in TARGET_PACKAGES) return
 
