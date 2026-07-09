@@ -1,4 +1,4 @@
-package com.angel.whatsappbot.service
+package com.undead85.messagebot.service
 
 import android.app.Notification
 import android.service.notification.NotificationListenerService
@@ -6,13 +6,13 @@ import android.service.notification.StatusBarNotification
 import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.core.app.NotificationCompat
-import com.angel.whatsappbot.BotPrefs
-import com.angel.whatsappbot.ai.LocalAiProcessor
-import com.angel.whatsappbot.ai.MediaPipeAiProcessor
-import com.angel.whatsappbot.ai.MockAiProcessor
-import com.angel.whatsappbot.model.Channel
-import com.angel.whatsappbot.model.IncomingMessage
-import com.angel.whatsappbot.reply.ReplySender
+import com.undead85.messagebot.BotPrefs
+import com.undead85.messagebot.ai.LocalAiProcessor
+import com.undead85.messagebot.ai.MediaPipeAiProcessor
+import com.undead85.messagebot.ai.MockAiProcessor
+import com.undead85.messagebot.model.Channel
+import com.undead85.messagebot.model.IncomingMessage
+import com.undead85.messagebot.reply.ReplySender
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

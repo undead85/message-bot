@@ -1,12 +1,12 @@
-package com.angel.whatsappbot.ai
+package com.undead85.messagebot.ai
 
 import android.content.Context
 import android.util.Log
-import com.angel.whatsappbot.BuildConfig
+import com.undead85.messagebot.BuildConfig
 import com.google.mediapipe.tasks.genai.llminference.LlmInference
 import com.google.mediapipe.tasks.genai.llminference.LlmInferenceSession
-import com.angel.whatsappbot.model.Channel
-import com.angel.whatsappbot.model.IncomingMessage
+import com.undead85.messagebot.model.Channel
+import com.undead85.messagebot.model.IncomingMessage
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import java.io.File

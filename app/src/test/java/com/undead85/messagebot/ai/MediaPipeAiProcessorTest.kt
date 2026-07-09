@@ -1,9 +1,9 @@
-package com.angel.whatsappbot.ai
+package com.undead85.messagebot.ai
 
 import android.content.Context
-import com.angel.whatsappbot.BuildConfig
-import com.angel.whatsappbot.model.Channel
-import com.angel.whatsappbot.model.IncomingMessage
+import com.undead85.messagebot.BuildConfig
+import com.undead85.messagebot.model.Channel
+import com.undead85.messagebot.model.IncomingMessage
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull

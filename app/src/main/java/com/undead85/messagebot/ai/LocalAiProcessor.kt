@@ -1,6 +1,6 @@
-package com.angel.whatsappbot.ai
+package com.undead85.messagebot.ai
 
-import com.angel.whatsappbot.model.IncomingMessage
+import com.undead85.messagebot.model.IncomingMessage
 
 /**
  * Abstracción del motor de IA local. El servicio de notificaciones solo conoce

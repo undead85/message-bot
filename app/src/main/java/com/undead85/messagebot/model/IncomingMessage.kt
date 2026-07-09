@@ -1,4 +1,4 @@
-package com.angel.whatsappbot.model
+package com.undead85.messagebot.model
 
 /**
  * Red social de origen del mensaje. Meta Business Suite centraliza los tres

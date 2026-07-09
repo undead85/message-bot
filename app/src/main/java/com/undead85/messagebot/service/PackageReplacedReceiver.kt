@@ -1,4 +1,4 @@
-package com.angel.whatsappbot.service
+package com.undead85.messagebot.service
 
 import android.content.BroadcastReceiver
 import android.content.ComponentName

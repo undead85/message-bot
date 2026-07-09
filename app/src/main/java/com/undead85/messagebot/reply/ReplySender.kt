@@ -1,4 +1,4 @@
-package com.angel.whatsappbot.reply
+package com.undead85.messagebot.reply
 
 import android.app.Notification
 import android.app.PendingIntent

@@ -15,11 +15,11 @@ val secrets = Properties().apply {
 fun secret(key: String, default: String): String = secrets.getProperty(key) ?: default
 
 android {
-    namespace = "com.angel.whatsappbot"
+    namespace = "com.undead85.messagebot"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.angel.whatsappbot"
+        applicationId = "com.undead85.messagebot"
         minSdk = 26
         targetSdk = 35
         versionCode = 1

@@ -1,4 +1,4 @@
-package com.angel.whatsappbot
+package com.undead85.messagebot
 
 import android.content.Context
 import org.junit.Assert.assertFalse

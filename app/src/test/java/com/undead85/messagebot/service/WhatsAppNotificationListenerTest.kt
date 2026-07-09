@@ -1,11 +1,11 @@
-package com.angel.whatsappbot.service
+package com.undead85.messagebot.service
 
 import android.app.Notification
 import android.os.Process
 import android.service.notification.StatusBarNotification
 import androidx.core.app.NotificationCompat
 import androidx.core.app.Person
-import com.angel.whatsappbot.model.Channel
+import com.undead85.messagebot.model.Channel
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
