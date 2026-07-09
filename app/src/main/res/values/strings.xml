@@ -6,6 +6,12 @@
     <string name="btn_battery_optimization">Eximir de optimización de batería</string>
     <string name="status_template">Acceso a notificaciones: %1$s\nExención de batería: %2$s\nBot: %3$s</string>
     <string name="switch_bot_enabled">Respuestas automáticas</string>
+    <string name="switch_llm_enabled">Motor de IA (Gemma)</string>
     <string name="bot_state_on">✅ activo</string>
     <string name="bot_state_off">⏸️ pausado</string>
+    <string name="btn_view_log">Ver registro de actividad</string>
+    <string name="log_title">Registro de actividad</string>
+    <string name="btn_log_refresh">Actualizar</string>
+    <string name="btn_log_clear">Limpiar</string>
+    <string name="log_empty">Sin actividad registrada todavía.</string>
 </resources>

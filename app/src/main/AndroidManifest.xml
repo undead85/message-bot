@@ -29,6 +29,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".LogActivity"
+            android:exported="false"
+            android:label="@string/log_title" />
+
         <!-- Re-enlaza el listener automáticamente tras actualizar la app. -->
         <receiver
             android:name=".service.PackageReplacedReceiver"

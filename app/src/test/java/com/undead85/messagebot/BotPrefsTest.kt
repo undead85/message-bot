@@ -26,4 +26,15 @@ class BotPrefsTest {
         BotPrefs.setEnabled(context, true)
         assertTrue(BotPrefs.isEnabled(context))
     }
+
+    @Test
+    fun `el LLM arranca habilitado y su flag persiste`() {
+        assertTrue(BotPrefs.isLlmEnabled(context))
+
+        BotPrefs.setLlmEnabled(context, false)
+        assertFalse(BotPrefs.isLlmEnabled(context))
+
+        BotPrefs.setLlmEnabled(context, true)
+        assertTrue(BotPrefs.isLlmEnabled(context))
+    }
 }

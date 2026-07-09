@@ -35,12 +35,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        findViewById<MaterialSwitch>(R.id.switchLlmEnabled).apply {
+            isChecked = BotPrefs.isLlmEnabled(this@MainActivity)
+            setOnCheckedChangeListener { _, checked ->
+                BotPrefs.setLlmEnabled(this@MainActivity, checked)
+            }
+        }
+
         findViewById<Button>(R.id.btnNotificationAccess).setOnClickListener {
             startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
         }
 
         findViewById<Button>(R.id.btnBatteryOptimization).setOnClickListener {
             requestIgnoreBatteryOptimizations()
+        }
+
+        findViewById<Button>(R.id.btnViewLog).setOnClickListener {
+            startActivity(Intent(this, LogActivity::class.java))
         }
     }
 

@@ -2,6 +2,8 @@ package com.undead85.messagebot.ai
 
 import android.content.Context
 import android.util.Log
+import com.undead85.messagebot.BotLog
+import com.undead85.messagebot.BotPrefs
 import com.undead85.messagebot.BuildConfig
 import com.google.mediapipe.tasks.genai.llminference.LlmInference
 import com.google.mediapipe.tasks.genai.llminference.LlmInferenceSession
@@ -80,8 +82,17 @@ class MediaPipeAiProcessor(private val context: Context) : LocalAiProcessor {
         // riesgo de que un modelo pequeño deforme la URL).
         if (CATALOG_URL.isNotBlank() && CATALOG_TRIGGER.containsMatchIn(incoming.message)) {
             Log.d(TAG, "Pregunta de catálogo detectada; respuesta directa con enlace")
+            BotLog.log(context, "Catálogo → ${incoming.sender}")
             remember(incoming, CATALOG_REPLY)
             return CATALOG_REPLY
+        }
+
+        // LLM apagado desde la app: modo determinista (solo el atajo del
+        // catálogo responde). Se descarga el modelo para liberar RAM.
+        if (!BotPrefs.isLlmEnabled(context)) {
+            unloadEngine()
+            BotLog.log(context, "LLM apagado: sin respuesta para ${incoming.sender}")
+            return null
         }
 
         val history = recallHistory(incoming)
@@ -130,10 +141,23 @@ class MediaPipeAiProcessor(private val context: Context) : LocalAiProcessor {
         return reply.take(MAX_REPLY_CHARS).trim().takeIf { it.isNotEmpty() }
     }
 
+    /** Libera el modelo de la RAM (se recarga solo en la próxima inferencia). */
+    private suspend fun unloadEngine() {
+        engineLock.withLock {
+            engine?.let {
+                it.close()
+                engine = null
+                Log.i(TAG, "Modelo descargado de la RAM")
+                BotLog.log(context, "Modelo LLM descargado de la RAM")
+            }
+        }
+    }
+
     /** Carga perezosa: la primera inferencia paga el coste de abrir el modelo. */
     private fun obtainEngine(): LlmInference = engine ?: run {
         val model = modelFile() ?: error("Modelo .task no encontrado")
         Log.i(TAG, "Cargando modelo ${model.absolutePath} (${model.length() / 1_000_000}MB)")
+        BotLog.log(context, "Cargando modelo ${model.name} (${model.length() / 1_000_000}MB)")
         LlmInference.createFromOptions(
             context,
             LlmInference.LlmInferenceOptions.builder()

@@ -62,4 +62,16 @@ class MediaPipeAiProcessorTest {
         val group = incoming("precio?").copy(isGroup = true)
         assertNull(p.generateReply(group))
     }
+
+    @Test
+    fun `con el LLM apagado los mensajes no-catalogo no se responden`() = runBlocking {
+        val context = RuntimeEnvironment.getApplication() as Context
+        com.undead85.messagebot.BotPrefs.setLlmEnabled(context, false)
+        try {
+            // Sin palabras de catálogo: iría al LLM, pero está apagado.
+            assertNull(processor().generateReply(incoming("hola, buenas tardes")))
+        } finally {
+            com.undead85.messagebot.BotPrefs.setLlmEnabled(context, true)
+        }
+    }
 }

@@ -6,6 +6,7 @@ import android.service.notification.StatusBarNotification
 import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.core.app.NotificationCompat
+import com.undead85.messagebot.BotLog
 import com.undead85.messagebot.BotPrefs
 import com.undead85.messagebot.ai.LocalAiProcessor
 import com.undead85.messagebot.ai.MediaPipeAiProcessor
@@ -112,6 +113,7 @@ class WhatsAppNotificationListener : NotificationListenerService() {
         }
 
         Log.d(TAG, "[${incoming.channel}] Mensaje de ${incoming.sender} en '${incoming.chatTitle}': ${incoming.message}")
+        BotLog.log(this, "📥 [${incoming.channel}] ${incoming.sender}: ${incoming.message.take(80)}")
 
         // 5) Procesar con la IA fuera del hilo principal y responder.
         serviceScope.launch {
@@ -123,8 +125,14 @@ class WhatsAppNotificationListener : NotificationListenerService() {
                 }
                 val sent = sendReplyThrottled(sbn, reply)
                 Log.d(TAG, if (sent) "Respuesta enviada: $reply" else "No se encontró acción de respuesta")
+                BotLog.log(
+                    applicationContext,
+                    if (sent) "📤 → ${incoming.sender}: ${reply.take(80)}"
+                    else "⚠️ Sin acción de respuesta para ${incoming.sender}",
+                )
             } catch (t: Throwable) {
                 Log.e(TAG, "Error procesando/respondiendo el mensaje", t)
+                BotLog.log(applicationContext, "❌ Error con mensaje de ${incoming.sender}: ${t.message}")
             }
         }
     }
